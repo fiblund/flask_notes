@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Welcome to the Flask note app {% endblock %}</h1>
+    <a class="nav-link" href="{{ url_for('create') }}">New note</a>
+    {% for note in notes %}
+    <div class="card">
+        <div class="card-body">
+            <span class="badge badge-primary">#{{ note['id'] }}</span>
+            <span class="badge badge-default">{{ note['created'] }}</span>
+            <hr>
+            <p>{{ note['content'] |safe }}</p>
+            <br>
+            <a class="nav-link" href="{{ url_for('edit', note_id=note['id']) }}">Edit note</a>
+            <a class="nav-link" href="{{ url_for('delete', note_id=note['id']) }}">Delete note</a>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+{% endblock %}
